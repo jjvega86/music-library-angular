@@ -1,14 +1,21 @@
 <section class="listing-apply">
-  <h2 class="section-heading">Apply now to live here</h2>
-  <form [formGroup]="songForm">
-    <label for="first-name">First Name</label>
-    <input id="first-name" type="text" formControlName="firstName">
+  <h2 class="section-heading">Add a Song to the Library!</h2>
+  <form [formGroup]="songForm" (submit)="addSong">
+    <label for="first-name">Name</label>
+    <input id="name" type="text" formControlName="name">
 
-    <label for="last-name">Last Name</label>
-    <input id="last-name" type="text" formControlName="lastName">
+    <label for="artist">Artist:</label>
+    <input id="artist" type="text" formControlName="artist">
 
-    <label for="email">Email</label>
-    <input id="email" type="email" formControlName="email">
-    <button type="submit" class="primary">Apply now</button>
+    <label for="album">Album</label>
+    <input id="album" type="text" formControlName="album">
+
+    <label for="genre">Genre</label>
+    <input id="genre" type="text" formControlName="genre">
+
+    <label for="releaseDate">Release Date</label>
+    <input id="releaseDate" type="date" formControlName="releaseDate">
+
+    <button type="submit" class="primary">Add Song</button>
   </form>
 </section>
