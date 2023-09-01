@@ -1,11 +1,10 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { SongComponent } from '../song/song.component';
 
 @Component({
   selector: 'app-song-table',
   standalone: true,
-  imports: [CommonModule, SongComponent],
+  imports: [CommonModule],
   templateUrl: './song-table.component.html',
   styleUrls: ['./song-table.component.css']
 })
