@@ -8,4 +8,5 @@
 // TODO: Wire EDIT button on each row to allow for editing song in place (on save, row and API shows updated data)
 // TODO: Complete design and styling
 // TODO: Create types/interfaces for all data structures (song, song-list, etc)
+// TODO: Refactor to move templates inline inside of component file
 
