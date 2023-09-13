@@ -1,85 +1,43 @@
-import { Component } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { MusicService } from '../music.service';
+import { Observable, Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-song-table',
   standalone: true,
   imports: [CommonModule],
-  templateUrl: './song-table.component.html',
+  template: `
+  <table>
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>Name</th>
+      <th>Artist</th>
+      <th>Album</th>
+      <th>Release Date</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let song of songs | async">
+        <td>{{ song.id }}</td>
+        <td>{{ song.name }}</td>
+        <td>{{ song.artist }}</td>
+        <td>{{ song.album }}</td>
+        <td>{{ song.releaseDate }}</td>
+    </tr>
+  </tbody>
+</table>
+  `,
   styleUrls: ['./song-table.component.css']
 })
 export class SongTableComponent {
-  songs = [
-    {
-      id: 1,
-      name: "Eriatarka",
-      artist: "The Mars Volta",
-      album: "Deloused in the Comatorium",
-      releaseDate: "June 24, 2003"
-    },
-    {
-      id: 2,
-      name: "Inertiatic ESP",
-      artist: "The Mars Volta",
-      album: "Deloused in the Comatorium",
-      releaseDate: "June 24, 2003"
-    },
-    {
-      id: 3,
-      name: "Cicatriz ESP",
-      artist: "The Mars Volta",
-      album: "Deloused in the Comatorium",
-      releaseDate: "June 24, 2003"
-    },
-    {
-      id: 4,
-      name: "Roulette Dares (The Haunt of Death)",
-      artist: "The Mars Volta",
-      album: "Deloused in the Comatorium",
-      releaseDate: "June 24, 2003"
-    },
-    {
-      id: 5,
-      name: "Televators",
-      artist: "The Mars Volta",
-      album: "Deloused in the Comatorium",
-      releaseDate: "June 24, 2003"
-    },
-    {
-      id: 6,
-      name: "Take the Veil Cerpin Taxt",
-      artist: "The Mars Volta",
-      album: "Deloused in the Comatorium",
-      releaseDate: "June 24, 2003"
-    },
-    {
-      id: 7,
-      name: "Miranda That Ghost Just Isn't Holy Anymore",
-      artist: "The Mars Volta",
-      album: "Deloused in the Comatorium",
-      releaseDate: "June 24, 2003"
-    },
-    {
-      id: 8,
-      name: "Drunkship of Ceres",
-      artist: "The Mars Volta",
-      album: "Deloused in the Comatorium",
-      releaseDate: "June 24, 2003"
-    },
-    {
-      id: 9,
-      name: "Static and Silence",
-      artist: "The Mars Volta",
-      album: "Deloused in the Comatorium",
-      releaseDate: "June 24, 2003"
-    },
-    {
-      id: 10,
-      name: "The Widow",
-      artist: "The Mars Volta",
-      album: "Deloused in the Comatorium",
-      releaseDate: "June 24, 2003"
-    }
-  ];
+  music : MusicService = inject(MusicService);
+  songs: Observable<any>;
+
+  constructor(){
+    this.songs = this.music.getAllSongs();
+  }
+
 
 }
