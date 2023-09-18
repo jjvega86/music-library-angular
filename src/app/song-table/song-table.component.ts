@@ -1,7 +1,7 @@
 import { Component, OnInit, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MusicService } from '../music.service';
-import { Observable, Subscription } from 'rxjs';
+import { Observable, Subscription, switchMap } from 'rxjs';
 
 @Component({
   selector: 'app-song-table',
@@ -12,16 +12,16 @@ import { Observable, Subscription } from 'rxjs';
   <thead>
     <tr>
       <th>ID</th>
-      <th>Name</th>
+      <th>Title</th>
       <th>Artist</th>
       <th>Album</th>
       <th>Release Date</th>
     </tr>
   </thead>
   <tbody>
-    <tr *ngFor="let song of songs | async">
+    <tr *ngFor="let song of songs$ | async">
         <td>{{ song.id }}</td>
-        <td>{{ song.name }}</td>
+        <td>{{ song.title }}</td>
         <td>{{ song.artist }}</td>
         <td>{{ song.album }}</td>
         <td>{{ song.releaseDate }}</td>
@@ -33,11 +33,7 @@ import { Observable, Subscription } from 'rxjs';
 })
 export class SongTableComponent {
   music : MusicService = inject(MusicService);
-  songs: Observable<any>;
-
-  constructor(){
-    this.songs = this.music.getAllSongs();
-  }
-
-
+  songs$ = this.music.refetch.pipe(
+    switchMap(() => this.music.getAllSongs())
+  )
 }
